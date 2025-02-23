@@ -6,34 +6,10 @@ import { Sparkles, Zap, Trophy } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-
-// Mock data for flashcards
-const flashcards = [
-  {
-    word: "Maayong buntag!",
-    definition: "Good morning!",
-  },
-  {
-    word: "Maayong adlaw!",
-    definition: "Good day!",
-  },
-  {
-    word: "Maayong hapon!",
-    definition: "Good afternoon!",
-  },
-  {
-    word: "Amping",
-    definition: "Goodbye",
-  },
-  {
-    word: "Oo",
-    definition: "Yes",
-  },
-  { word: "Dili", definition: "No" },
-]
+import { flashcards } from "./MockData"
 
 export default function FlashcardGame() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
@@ -65,7 +41,7 @@ export default function FlashcardGame() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
-        <CardContent className="p-6">
+        <CardHeader>
           <div className="flex justify-between items-center mb-4">
             <Badge variant="secondary" className="text-lg px-3 py-1">
               <Trophy className="text-yellow-400 mr-2" />
@@ -77,6 +53,16 @@ export default function FlashcardGame() {
             </Badge>
           </div>
           <Progress value={progress} className="mb-6" />
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <Badge variant="outline" className="text-sm px-3 py-1">
+              {flashcards[currentCardIndex].category}
+            </Badge>
+            <Badge variant="outline" className="text-sm px-3 py-1">
+              {flashcards[currentCardIndex].difficulty}
+            </Badge>
+          </div>
           <motion.div
             className="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg p-6 h-64 flex items-center justify-center cursor-pointer shadow-lg"
             onClick={handleFlip}
@@ -108,18 +94,22 @@ export default function FlashcardGame() {
               I Know It!
             </Button>
           </div>
+        </CardContent>
+        <CardFooter className="flex flex-col">
           <Separator className="my-6" />
-          <div className="text-center text-muted-foreground">
-            <p className="text-sm mb-2">
-              Keep learning to unlock achievements!
-            </p>
-            <div className="flex justify-center">
-              <Sparkles className="text-yellow-300 mr-2" />
-              <Sparkles className="text-yellow-300 mr-2" />
-              <Sparkles className="text-yellow-300" />
+          <div className="p-6">
+            <div className="text-center text-muted-foreground">
+              <p className="text-sm mb-2">
+                Keep learning to unlock achievements!
+              </p>
+              <div className="flex justify-center">
+                <Sparkles className="text-yellow-300 mr-2" />
+                <Sparkles className="text-yellow-300 mr-2" />
+                <Sparkles className="text-yellow-300" />
+              </div>
             </div>
           </div>
-        </CardContent>
+        </CardFooter>
       </Card>
     </div>
   )
