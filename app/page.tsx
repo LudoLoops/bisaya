@@ -1,9 +1,7 @@
 import { Word } from "./types"
-import DailyProgress from "./components/DailyProgress"
-import WordCard from "./components/WordCard"
 
 import { getWords } from "./db/queries"
-import FlashcardGame from "./components/flashcard-game"
+import FlashcardGame from "../components/flashcard-game"
 export default async function Home() {
   const words = await getWords()
   return (

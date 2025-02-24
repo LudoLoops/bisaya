@@ -1,4 +1,5 @@
 import {
+  primaryKey,
   pgTable,
   uuid,
   text,
@@ -6,7 +7,7 @@ import {
   integer,
   date,
 } from "drizzle-orm/pg-core"
-import { relations } from "drizzle-orm"
+import { InferSelectModel, relations } from "drizzle-orm"
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -16,13 +17,15 @@ export const users = pgTable("users", {
 
 export const words = pgTable("words", {
   id: uuid("id").primaryKey().defaultRandom(),
-  cebuano: text("cebuano").notNull(),
+  bisaya: text("bisaya").notNull(),
   english: text("english").notNull(),
   category: text("category").notNull(),
   difficulty: text("difficulty").notNull(),
   example: text("example"),
   createdAt: timestamp("created_at").defaultNow(),
 })
+
+export type Words = InferSelectModel<typeof words>
 
 export const userProgress = pgTable("user_progress", {
   userId: uuid("user_id").references(() => users.id),
@@ -48,4 +51,22 @@ export const wordsRelations = relations(words, ({ many }) => ({
 export const userRelations = relations(users, ({ many }) => ({
   progress: many(userProgress),
   goals: many(dailyGoals),
+}))
+
+export const userProgressRelations = relations(userProgress, ({ one }) => ({
+  user: one(users, {
+    fields: [userProgress.userId],
+    references: [users.id],
+  }),
+  word: one(words, {
+    fields: [userProgress.wordId],
+    references: [words.id],
+  }),
+}))
+
+export const dailyGoalsRelations = relations(dailyGoals, ({ one }) => ({
+  user: one(users, {
+    fields: [dailyGoals.userId],
+    references: [users.id],
+  }),
 }))

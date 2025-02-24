@@ -8,6 +8,27 @@
       "when": 1740289934115,
       "tag": "0000_cooing_fenris",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740382472069,
+      "tag": "0001_conscious_arclight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740385216523,
+      "tag": "0002_peaceful_power_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1740392342502,
+      "tag": "0003_small_millenium_guard",
+      "breakpoints": true
     }
   ]
 }

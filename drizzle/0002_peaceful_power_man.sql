@@ -1,0 +1,1 @@
+ALTER TABLE "user_progress" DROP CONSTRAINT "user_progress_user_id_word_id_pk";

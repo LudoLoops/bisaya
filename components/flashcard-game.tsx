@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { flashcards } from "./MockData"
+import { flashcards } from "@/app/db/MockData"
 
 export default function FlashcardGame() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
