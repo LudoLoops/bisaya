@@ -1,24 +1,20 @@
-export interface Word {
-  id: string;
-  cebuano: string;
-  english: string;
-  category: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  example?: string;
+import { InferSelectModel } from "drizzle-orm"
+import { words, userProgress, dailyGoals } from "@/app/db/schema"
+
+// import type from schema and modify it if needed
+export type Word = InferSelectModel<typeof words> & {
+  difficulty: "beginner" | "intermediate" | "advanced"
 }
 
-export interface UserProgress {
-  userId: string;
-  wordId: string;
-  proficiency: number; // 0-100
-  lastReviewed: Date;
-  nextReview: Date;
+// export type PostWord = Omit<Word, "id" | "createdAt">
+export type PostWord = {
+  bisaya: string
+  english: string
+  category: string
+  difficulty: "beginner" | "intermediate" | "advanced"
+  example?: string
 }
 
-export interface DailyGoal {
-  userId: string;
-  date: Date;
-  wordsLearned: number;
-  targetWords: number;
-  streak: number;
-}
+export type UserProgress = InferSelectModel<typeof userProgress>
+
+export type DailyGoal = InferSelectModel<typeof dailyGoals>

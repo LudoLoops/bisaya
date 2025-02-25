@@ -16,7 +16,7 @@ export const users = pgTable("users", {
 
 export const words = pgTable("words", {
   id: uuid("id").primaryKey().defaultRandom(),
-  cebuano: text("cebuano").notNull(),
+  bisaya: text("bisaya").notNull(),
   english: text("english").notNull(),
   category: text("category").notNull(),
   difficulty: text("difficulty").notNull(),
@@ -48,4 +48,22 @@ export const wordsRelations = relations(words, ({ many }) => ({
 export const userRelations = relations(users, ({ many }) => ({
   progress: many(userProgress),
   goals: many(dailyGoals),
+}))
+
+export const userProgressRelations = relations(userProgress, ({ one }) => ({
+  user: one(users, {
+    fields: [userProgress.userId],
+    references: [users.id],
+  }),
+  word: one(words, {
+    fields: [userProgress.wordId],
+    references: [words.id],
+  }),
+}))
+
+export const dailyGoalsRelations = relations(dailyGoals, ({ one }) => ({
+  user: one(users, {
+    fields: [dailyGoals.userId],
+    references: [users.id],
+  }),
 }))

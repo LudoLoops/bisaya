@@ -1,0 +1,1 @@
+ALTER TABLE "user_progress" ADD CONSTRAINT "user_progress_user_id_word_id_pk" PRIMARY KEY("user_id","word_id");

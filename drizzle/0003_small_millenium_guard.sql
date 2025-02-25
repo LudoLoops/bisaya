@@ -1,0 +1,1 @@
+ALTER TABLE "words" RENAME COLUMN "cebuano" TO "bisaya";
