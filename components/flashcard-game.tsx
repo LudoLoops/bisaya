@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Sparkles, Zap, Trophy } from "lucide-react"
-
+import type { Word } from "@/app/types"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { flashcards } from "@/app/db/MockData"
+import { getWords } from "@/app/db/queries"
 
 export default function FlashcardGame() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
@@ -17,14 +18,28 @@ export default function FlashcardGame() {
   const [score, setScore] = useState(0)
   const [streak, setStreak] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [words, setWords] = useState<Word[]>([])
+
+  async function fetchWords() {
+    try {
+      setWords(await getWords())
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
-    setProgress((currentCardIndex / flashcards.length) * 100)
+    fetchWords()
+  }, [])
+
+  useEffect(() => {
+    setProgress((currentCardIndex / words.length) * 100)
   }, [currentCardIndex])
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
+  console.log(words)
 
   const handleNext = (known: boolean) => {
     if (known) {
@@ -35,7 +50,7 @@ export default function FlashcardGame() {
     }
 
     setIsFlipped(false)
-    setCurrentCardIndex(prevIndex => (prevIndex + 1) % flashcards.length)
+    setCurrentCardIndex(prevIndex => (prevIndex + 1) % words.length)
   }
 
   return (
