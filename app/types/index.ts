@@ -6,7 +6,14 @@ export type Word = InferSelectModel<typeof words> & {
   difficulty: "beginner" | "intermediate" | "advanced"
 }
 
-export type PostWord = Omit<Word, "id" | "createdAt">
+// export type PostWord = Omit<Word, "id" | "createdAt">
+export type PostWord = {
+  bisaya: string
+  english: string
+  category: string
+  difficulty: "beginner" | "intermediate" | "advanced"
+  example?: string
+}
 
 export type UserProgress = InferSelectModel<typeof userProgress>
 

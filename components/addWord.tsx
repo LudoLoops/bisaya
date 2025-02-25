@@ -64,7 +64,7 @@ export default function AddWord() {
         difficulty: values.difficulty,
         example: values.example || "",
       }
-      // await postWord(word)
+      await postWord(word)
       toast("Success", {
         description: `${values.bisaya} was properly added into the database `,
       })
