@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { postWord } from "@/app/db/queries"
 import { toast } from "sonner"
+import type { PostWord } from "@/app/types"
 
 const formSchema = z.object({
   bisaya: z.string().min(2, {
@@ -56,7 +57,14 @@ export default function AddWord() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       form.setValue("isSubmitting", true)
-      // await postWord([values])
+      const word: PostWord = {
+        bisaya: values.bisaya,
+        english: values.english,
+        category: values.category,
+        difficulty: values.difficulty,
+        example: values.example || "",
+      }
+      // await postWord(word)
       toast("Success", {
         description: `${values.bisaya} was properly added into the database `,
       })
@@ -114,11 +122,11 @@ export default function AddWord() {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Catégorie</FormLabel>
+                    <FormLabel>Category</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Ex: Nourriture, Transport, etc."
+                        placeholder="e.g: Greeting, Transport, ..."
                       />
                     </FormControl>
                     <FormMessage>

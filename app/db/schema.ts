@@ -1,5 +1,4 @@
 import {
-  primaryKey,
   pgTable,
   uuid,
   text,
@@ -7,7 +6,7 @@ import {
   integer,
   date,
 } from "drizzle-orm/pg-core"
-import { InferSelectModel, relations } from "drizzle-orm"
+import { relations } from "drizzle-orm"
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -24,8 +23,6 @@ export const words = pgTable("words", {
   example: text("example"),
   createdAt: timestamp("created_at").defaultNow(),
 })
-
-export type Words = InferSelectModel<typeof words>
 
 export const userProgress = pgTable("user_progress", {
   userId: uuid("user_id").references(() => users.id),

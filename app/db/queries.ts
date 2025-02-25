@@ -1,11 +1,11 @@
-import { and, eq, gte, lte } from "drizzle-orm"
 import { db } from "./index"
-import { words, type Words } from "./schema"
+import { words } from "./schema"
+import type { PostWord } from "@/app/types"
 
 export async function getWords() {
   return db.select().from(words)
 }
 
-export async function postWord(word: Words) {
+export async function postWord(word: PostWord) {
   return db.insert(words).values(word)
 }
