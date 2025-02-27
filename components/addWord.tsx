@@ -138,7 +138,7 @@ export default function AddWord() {
 
               <FormField
                 name="difficulty"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Difficulty level</FormLabel>
                     <FormControl>
