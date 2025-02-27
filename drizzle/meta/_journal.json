@@ -29,6 +29,13 @@
       "when": 1740392342502,
       "tag": "0003_small_millenium_guard",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1740649615673,
+      "tag": "0004_chubby_wendigo",
+      "breakpoints": true
     }
   ]
 }
