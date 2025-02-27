@@ -9,7 +9,6 @@ import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { flashcards } from "@/app/db/MockData"
 import { getWords } from "@/app/db/queries"
 
 export default function FlashcardGame() {
@@ -23,6 +22,7 @@ export default function FlashcardGame() {
   async function fetchWords() {
     try {
       setWords(await getWords())
+      console.log(words)
     } catch (error) {
       console.error(error)
     }
@@ -39,7 +39,8 @@ export default function FlashcardGame() {
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
-  console.log(words)
+  console.log(words[0])
+  console.log(words[1])
 
   const handleNext = (known: boolean) => {
     if (known) {
@@ -51,6 +52,7 @@ export default function FlashcardGame() {
 
     setIsFlipped(false)
     setCurrentCardIndex(prevIndex => (prevIndex + 1) % words.length)
+    console.log(currentCardIndex)
   }
 
   return (
@@ -72,10 +74,10 @@ export default function FlashcardGame() {
         <CardContent className="p-6">
           <div className="flex justify-between items-center mb-4">
             <Badge variant="outline" className="text-sm px-3 py-1">
-              {flashcards[currentCardIndex].category}
+              {words[currentCardIndex]?.category}
             </Badge>
             <Badge variant="outline" className="text-sm px-3 py-1">
-              {flashcards[currentCardIndex].difficulty}
+              {words[currentCardIndex]?.difficulty}
             </Badge>
           </div>
           <motion.div
@@ -91,8 +93,8 @@ export default function FlashcardGame() {
             >
               <h2 className="text-3xl font-bold mb-2">
                 {isFlipped
-                  ? flashcards[currentCardIndex].definition
-                  : flashcards[currentCardIndex].word}
+                  ? words[currentCardIndex]?.english
+                  : words[currentCardIndex]?.bisaya}
               </h2>
               {/* <p className="text-sm">{isFlipped ? "Definition" : "Word"}</p> */}
             </div>
