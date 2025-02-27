@@ -1,5 +1,3 @@
-import { Word } from "./types"
-
 import { getWords } from "./db/queries"
 import FlashcardGame from "../components/flashcard-game"
 export default async function Home() {

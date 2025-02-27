@@ -34,7 +34,7 @@ export default function FlashcardGame() {
 
   useEffect(() => {
     setProgress((currentCardIndex / words.length) * 100)
-  }, [currentCardIndex])
+  }, [currentCardIndex, words.length])
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
