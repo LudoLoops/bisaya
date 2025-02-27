@@ -9,13 +9,15 @@ import {
 import { relations } from "drizzle-orm"
 
 export const users = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  email: text("email").notNull().unique(),
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
+  clerkId: text("clerk_id").notNull().unique(), // Add clerkId and make it unique
+  username: text("username"),
   createdAt: timestamp("created_at").defaultNow(),
 })
 
 export const words = pgTable("words", {
   id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id),
   bisaya: text("bisaya").notNull(),
   english: text("english").notNull(),
   category: text("category").notNull(),
